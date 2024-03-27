@@ -19,8 +19,11 @@ internal class RoundStartFreezeTimeManager
 
     private float FrozenUntilTime => _roundStartTime + _plugin.Config.RoundStartFreezeTime;
     private int FrozenUntilTick => _roundStartTick + (int)(_plugin.Config.RoundStartFreezeTime / Server.TickInterval);
+    private string CountDownSoundPath => _plugin.Config.CountDownSoundPath;
+    private bool EnableCountDownSound => _plugin.Config.EnableCountDownSound;
 
     private Timer? _countdownTimer;
+    private Timer? _soundTimer;
 
     public RoundStartFreezeTimeManager(ChaseMod chaseMod, PlayerFreezeManager playerFreezeManager)
     {
@@ -64,6 +67,17 @@ internal class RoundStartFreezeTimeManager
                 _countdownTimer = null;
             }
 
+            if (_soundTimer != null)
+            {
+                _soundTimer?.Kill();
+                _soundTimer = null;
+            }
+
+            if (EnableCountDownSound == true)
+            {
+                _soundTimer = _plugin.AddTimer(1.0f, PlaySound, TimerFlags.REPEAT);
+            }
+
             _countdownTimer = _plugin.AddTimer(0.1f, CountdownTimerTick, TimerFlags.REPEAT);
 
             return HookResult.Continue;
@@ -83,6 +97,22 @@ internal class RoundStartFreezeTimeManager
         foreach (var player in ChaseModUtils.GetAllRealPlayers())
         {
             player.PrintToCenter(timeLeft > 0 ? $"Round begins in {timeLeft:0.0} seconds!" : "Round start!");
+        }
+
+    }
+
+    private void PlaySound()
+    {
+        var timeLeft = FrozenUntilTime - Server.CurrentTime;
+        if (timeLeft <= 0)
+        {
+            _soundTimer?.Kill();
+            _soundTimer = null;
+        }
+
+        foreach (var player in ChaseModUtils.GetAllRealPlayers())
+        {
+            player.ExecuteClientCommand($"play {CountDownSoundPath}");
         }
     }
 
