@@ -48,5 +48,4 @@ public static class ChaseModUtils
     {
         Server.PrintToChatAll($" {ChatColors.Magenta}HNS {ChatColors.Grey}| {message}");
     }
-
 }

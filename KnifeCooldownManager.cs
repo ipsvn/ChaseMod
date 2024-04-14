@@ -4,6 +4,7 @@ using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
 using CounterStrikeSharp.API.Modules.Utils;
 
 namespace ChaseMod;
+
 internal class KnifeCooldownManager
 {
     private readonly ChaseMod _plugin;
@@ -40,7 +41,6 @@ internal class KnifeCooldownManager
         }
 
         var attacker = info.Attacker.Value!.As<CCSPlayerPawn>();
-        var attackerController = attacker.Controller.Value!;
 
         var pawn = entity.As<CCSPlayerPawn>();
         var controller = pawn.OriginalController.Value!;

@@ -6,6 +6,7 @@ using ChaseMod.Utils;
 using CounterStrikeSharp.API;
 
 namespace ChaseMod;
+
 internal class NadeManager
 {
     private readonly ChaseMod _plugin;
@@ -124,5 +125,4 @@ internal class NadeManager
 
         smoke.Remove();
     }
-
 }

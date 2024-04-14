@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 
 namespace ChaseMod;
+
 public sealed class ChaseModConfig : BasePluginConfig
 {
     [JsonPropertyName("Version")]

@@ -4,6 +4,7 @@ using CounterStrikeSharp.API.Modules.Utils;
 using ChaseMod.Utils.Memory;
 
 namespace ChaseMod;
+
 internal class TeamSwitchManager
 {
     private bool _switchingTeams;

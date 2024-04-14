@@ -48,15 +48,10 @@ internal class RoundStartFreezeTimeManager
 
             SwitchFallDamage(false);
 
-            foreach (var player in ChaseModUtils.GetAllRealPlayers())
+            foreach (var player in ChaseModUtils.GetAllRealPlayers().Where(p => p.Team == CsTeam.CounterTerrorist))
             {
-                var pawn = player.PlayerPawn.Value!;
-
-                if (player.Team == CsTeam.CounterTerrorist)
-                {
-                    _playerFreezeManager.Freeze(player, _plugin.Config.RoundStartFreezeTime, 
-                                                true, false, true);
-                }
+                _playerFreezeManager.Freeze(player, _plugin.Config.RoundStartFreezeTime, 
+                                            true, false, true);
             }
 
             if (_countdownTimer != null)
