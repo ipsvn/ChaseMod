@@ -85,10 +85,6 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
                 continue;
             }
 
-            if (!controller.PlayerPawn.IsValid)
-            {
-                continue;
-            }
             var pawn = controller.PlayerPawn.Value!;
 
             var weapons = pawn.WeaponServices?.MyWeapons;
