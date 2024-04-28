@@ -37,7 +37,7 @@ public static class ChaseModUtils
 
     public static List<CCSPlayerController> GetAllRealPlayers()
     {
-        return Utilities.GetPlayers().Where(p => IsRealPlayer(p)).ToList();
+        return Utilities.GetPlayers().Where(IsRealPlayer).ToList();
     }
 
     public static void ChatPrefixed(CCSPlayerController player, string message)

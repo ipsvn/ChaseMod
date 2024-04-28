@@ -103,9 +103,9 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
 
             foreach (var weaponHandle in weapons)
             {
-                if (!weaponHandle.IsValid) continue;
+                if (!weaponHandle.IsValid || weaponHandle.Value == null) continue;
 
-                var weapon = weaponHandle.Value!;
+                var weapon = weaponHandle.Value;
 
                 if (freezeRemaining > 0)
                 {

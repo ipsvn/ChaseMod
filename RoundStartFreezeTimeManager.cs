@@ -6,6 +6,7 @@ using ChaseMod.Utils;
 
 using Timer = CounterStrikeSharp.API.Modules.Timers.Timer;
 using CounterStrikeSharp.API.Modules.Cvars;
+using Microsoft.Extensions.Logging;
 
 namespace ChaseMod;
 

@@ -2,6 +2,7 @@
 using ChaseMod.Utils;
 using CounterStrikeSharp.API.Modules.Utils;
 using ChaseMod.Utils.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace ChaseMod;
 internal class TeamSwitchManager
@@ -76,11 +77,13 @@ internal class TeamSwitchManager
         _plugin.RegisterListener<Listeners.OnMapEnd>(() =>
         {
             _terroristWinstreak = 0;
+            _shouldSwitchTeams = false;
         });
     }
     
     private void SwitchTeams()
     {
+        ChaseMod.Logger.LogInformation("Switching teams...");
         _switchingTeams = true;
         
         CCSMatch.SwapTeamScores(
