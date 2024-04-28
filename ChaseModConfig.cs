@@ -19,4 +19,5 @@ public sealed class ChaseModConfig : BasePluginConfig
     [JsonPropertyName("alwaysDisableTerroristKnife")] public bool AlwaysDisableTerroristKnife { get; set; } = false;
     [JsonPropertyName("enableFreezeTimeCountDownSound")] public bool EnableFreezeTimeCountDownSound { get; set; } = false;
     [JsonPropertyName("freezeTimeCountDownSoundPath")] public string FreezeTimeCountDownSoundPath { get; set; } = "sounds/player/playerping";
+    [JsonPropertyName("disableBoostTriggers")] public bool DisableBoostTriggers { get; set; } = true;
 }
