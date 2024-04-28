@@ -4,8 +4,8 @@ using System.Text.Json.Serialization;
 namespace ChaseMod;
 public sealed class ChaseModConfig : BasePluginConfig
 {
-    [JsonPropertyName("Version")]
-    public override int Version { get; set; } = 3;
+    [JsonPropertyName("ConfigVersion")]
+    public override int Version { get; set; } = 4;
 
     [JsonPropertyName("ctStartFreezeTime")] public float RoundStartFreezeTime { get; set; } = 15.0f;
     [JsonPropertyName("knifeDamage")] public int KnifeDamage { get; set; } = 50;
