@@ -36,11 +36,6 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
         _knifeCooldownManager = new KnifeCooldownManager(this);
         _teamSwitchManager = new TeamSwitchManager(this);
 
-        RegisterEventHandler<EventPlayerJump>((player, info) =>
-        {
-            return HookResult.Continue;
-        });
-
         MiscCommands.AddCommands(this);
 
         _nadeManager.EnableHooks();
@@ -68,15 +63,11 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
     [GameEventHandler]
     public HookResult OnEventRoundFreezeEnd(EventRoundFreezeEnd @event, GameEventInfo info)
     {
-        if (Config.DisableBoostTriggers)
-        {
-            Server.NextFrame(TriggerWorkaround.DisableWorkaroundTriggers);
-        }
-        
+        Server.NextFrame(TriggerWorkaround.DisableWorkaroundTriggers);
         return HookResult.Continue;
     }
 
-    public void OnTick()
+    private void OnTick()
     {
         foreach (var controller in ChaseModUtils.GetAllRealPlayers())
         {

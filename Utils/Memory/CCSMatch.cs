@@ -3,6 +3,7 @@ using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
 using System.Runtime.InteropServices;
 
 namespace ChaseMod.Utils.Memory;
+
 public class CCSMatch
 {
     private static nint MATCH_OFFSET = 0xF3C;
@@ -41,7 +42,7 @@ public class CCSMatch
 
         var marshallMatch = Marshal.PtrToStructure<MCCSMatch>(structOffset);
 
-        short temp = marshallMatch.m_terroristScoreFirstHalf;
+        var temp = marshallMatch.m_terroristScoreFirstHalf;
         marshallMatch.m_terroristScoreFirstHalf = marshallMatch.m_ctScoreFirstHalf;
         marshallMatch.m_ctScoreFirstHalf = temp;
 

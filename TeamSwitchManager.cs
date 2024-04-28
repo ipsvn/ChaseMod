@@ -5,6 +5,7 @@ using ChaseMod.Utils.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace ChaseMod;
+
 internal class TeamSwitchManager
 {
     private bool _switchingTeams;

@@ -5,6 +5,7 @@ using CounterStrikeSharp.API.Modules.Memory;
 using Vector = CounterStrikeSharp.API.Modules.Utils.Vector;
 
 namespace ChaseMod.Utils;
+
 public static class Extensions
 {
     public static float Distance(this Vector thisVector, Vector vector2)
@@ -59,7 +60,7 @@ public static class Extensions
         }
     }
 
-    public static void SetMoveType(this CCSPlayerPawn pawn, MoveType_t moveType)
+    private static void SetMoveType(this CCSPlayerPawn pawn, MoveType_t moveType)
     {
         pawn.MoveType = moveType;
         Utilities.SetStateChanged(pawn, "CBaseEntity", "m_MoveType");

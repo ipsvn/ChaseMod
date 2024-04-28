@@ -75,7 +75,7 @@ internal class PlayerFreezeManager
         }
     }
 
-    public void Unfreeze(CCSPlayerController controller, bool sendMessage)
+    private void Unfreeze(CCSPlayerController controller, bool sendMessage)
     {
         if (!ChaseModUtils.IsRealPlayer(controller)) return;
         var pawn = controller.PlayerPawn.Value!;
@@ -110,10 +110,7 @@ internal class PlayerFreezeManager
             var timeRemaining = freezeState.Time - freezeTime;
             return timeRemaining;
         }
-        else
-        {
-            return null;
-        }
+        
+        return null;
     }
-
 }
