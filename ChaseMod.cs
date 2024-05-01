@@ -67,6 +67,19 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
         return HookResult.Continue;
     }
 
+    [GameEventHandler]
+    public HookResult OnEventRoundPrestart(EventRoundPrestart @event, GameEventInfo info)
+    {
+        _teamSwitchManager?.OnRoundPrestart();
+
+        foreach (var controller in Utilities.GetPlayers())
+        {
+            controller.RemoveAllItemsOnNextRoundReset = true;
+        }
+
+        return HookResult.Continue;
+    }
+
     private void OnTick()
     {
         foreach (var controller in ChaseModUtils.GetAllRealPlayers())

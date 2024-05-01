@@ -54,16 +54,6 @@ internal class TeamSwitchManager
             
             return HookResult.Continue;
         });
-        
-        _plugin.RegisterEventHandler<EventRoundPrestart>((@event, info) =>
-        {
-            if (_shouldSwitchTeams)
-            {
-                SwitchTeams();
-            }
-            
-            return HookResult.Continue;
-        });
 
         _plugin.RegisterEventHandler<EventPlayerTeam>((@event, info) =>
         {
@@ -82,6 +72,14 @@ internal class TeamSwitchManager
         });
     }
     
+    public void OnRoundPrestart()
+    {
+        if (_shouldSwitchTeams)
+        {
+            SwitchTeams();
+        }
+    }
+
     private void SwitchTeams()
     {
         ChaseMod.Logger.LogInformation("Switching teams...");
@@ -103,7 +101,6 @@ internal class TeamSwitchManager
                     controller.SwitchTeam(CsTeam.CounterTerrorist);
                     break;
             }
-            controller.RemoveAllItemsOnNextRoundReset = true;
         }
         _switchingTeams = false;
     }
