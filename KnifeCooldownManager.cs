@@ -1,7 +1,12 @@
-﻿using CounterStrikeSharp.API.Core;
+﻿using System.Drawing;
+using CounterStrikeSharp.API;
+using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Memory;
 using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
+using CounterStrikeSharp.API.Modules.Timers;
 using CounterStrikeSharp.API.Modules.Utils;
+
+using Timer = CounterStrikeSharp.API.Modules.Timers.Timer;
 
 namespace ChaseMod;
 
@@ -35,12 +40,12 @@ internal class KnifeCooldownManager
             return HookResult.Continue;
         }
 
-        if (entity.DesignerName != "player" || info.Attacker.Value!.DesignerName != "player")
+        if (entity.DesignerName != "player" || info.Attacker.Value?.DesignerName != "player")
         {
             return HookResult.Continue;
         }
 
-        var attacker = info.Attacker.Value!.As<CCSPlayerPawn>();
+        var attacker = info.Attacker.Value.As<CCSPlayerPawn>();
 
         var pawn = entity.As<CCSPlayerPawn>();
         var controller = pawn.OriginalController.Value!;
@@ -80,6 +85,24 @@ internal class KnifeCooldownManager
         info.Damage = _plugin.Config.KnifeDamage;
         info.DamageFlags |= TakeDamageFlags_t.DFLAG_SUPPRESS_PHYSICS_FORCE;
         _invulnerablePlayers[controller] = DateTime.Now.AddSeconds(_plugin.Config.KnifeCooldown);
+
+        if (pawn.Health - info.Damage > 0.0f)
+        {
+            pawn.Render = Color.FromArgb(160, 192, 0, 0);
+            Utilities.SetStateChanged(pawn, "CBaseModelEntity", "m_clrRender");
+
+            new Timer(_plugin.Config.KnifeCooldown, () =>
+            {
+                if (!pawn.IsValid)
+                {
+                    return;
+                }
+
+                pawn.Render = Color.White;
+                Utilities.SetStateChanged(pawn, "CBaseModelEntity", "m_clrRender");
+            }, TimerFlags.STOP_ON_MAPCHANGE);
+        }
+
         return HookResult.Continue;
     }
 }
