@@ -15,12 +15,12 @@ internal class KnifeCooldownManager
         _plugin = chaseMod;
     }
 
-    public void EnableHooks()
+    public void OnLoad()
     {
         VirtualFunctions.CBaseEntity_TakeDamageOldFunc.Hook(CBaseEntity_TakeDamageOldFuncHook, HookMode.Pre);
     }
 
-    public void DisableHooks()
+    public void OnUnload()
     {
         VirtualFunctions.CBaseEntity_TakeDamageOldFunc.Unhook(CBaseEntity_TakeDamageOldFuncHook, HookMode.Pre);
     }

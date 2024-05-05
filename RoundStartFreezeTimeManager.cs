@@ -31,7 +31,7 @@ internal class RoundStartFreezeTimeManager
         _playerFreezeManager = playerFreezeManager;
     }
 
-    public void Start()
+    public void OnLoad()
     {
         _plugin.RegisterEventHandler<EventRoundFreezeEnd>((@event, info) =>
         {

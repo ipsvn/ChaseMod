@@ -21,7 +21,7 @@ internal class TeamSwitchManager
         _plugin = chaseMod;
     }
 
-    public void Start()
+    public void OnLoad()
     {
         // TODO: Combine this _lastWinningTeam check logic in separate function since we're duplicating the logic atm.
         _plugin.RegisterEventHandler<EventRoundEnd>((@event, info) =>

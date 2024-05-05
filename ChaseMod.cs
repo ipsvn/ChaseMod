@@ -38,10 +38,10 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
 
         MiscCommands.AddCommands(this);
 
-        _nadeManager.EnableHooks();
-        _knifeCooldownManager.EnableHooks();
-        _teamSwitchManager.Start();
-        _roundStartFreezeTimeManager.Start();
+        _nadeManager.OnLoad();
+        _knifeCooldownManager.OnLoad();
+        _teamSwitchManager.OnLoad();
+        _roundStartFreezeTimeManager.OnLoad();
 
         if (Config.DisableBoostTriggers)
         {
@@ -53,11 +53,8 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
 
     public override void Unload(bool hotReload)
     {
-        if (hotReload)
-        {
-            _nadeManager?.DisableHooks();
-            _knifeCooldownManager?.DisableHooks();
-        }
+        _nadeManager?.OnUnload();
+        _knifeCooldownManager?.OnUnload();
     }
 
     [GameEventHandler]

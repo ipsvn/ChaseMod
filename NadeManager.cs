@@ -21,7 +21,7 @@ internal class NadeManager
         _roundStartFreezeTimeManager = roundStartFreezeTimeManager;
     }
 
-    public void EnableHooks()
+    public void OnLoad()
     {
         GrenadeFunctions.CSmokeGrenadeProjectile_CreateFunc.Hook(CSmokeGrenadeProjectile_CreateHook, HookMode.Post);
         _plugin.RegisterEventHandler<EventPlayerBlind>((@event, info) =>
@@ -40,7 +40,7 @@ internal class NadeManager
         });
     }
 
-    public void DisableHooks()
+    public void OnUnload()
     {
         GrenadeFunctions.CSmokeGrenadeProjectile_CreateFunc.Unhook(CSmokeGrenadeProjectile_CreateHook, HookMode.Post);
     }
