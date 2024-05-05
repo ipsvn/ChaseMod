@@ -26,6 +26,14 @@ internal class PlayerFreezeManager
         _plugin = chaseMod;
     }
 
+    public void OnUnload()
+    {
+        foreach(var player in Utilities.GetPlayers())
+        {
+            Unfreeze(player, false);
+        }
+    }
+
     public void Freeze(CCSPlayerController controller, float time, bool showEffect, bool sendMessage, bool resetVelocity)
     {
         if (!ChaseModUtils.IsRealPlayer(controller)) return;
@@ -91,6 +99,9 @@ internal class PlayerFreezeManager
 
         pawn.Render = Color.FromArgb(pawn.Render.A, 255, 255, 255);
         Utilities.SetStateChanged(pawn, "CBaseModelEntity", "m_clrRender");
+
+        pawn.HealthShotBoostExpirationTime = Server.CurrentTime;
+        Utilities.SetStateChanged(pawn, "CCSPlayerPawn", "m_flHealthShotBoostExpirationTime");
 
         _frozenPlayers.Remove(controller);
 

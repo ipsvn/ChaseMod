@@ -53,6 +53,7 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
 
     public override void Unload(bool hotReload)
     {
+        _freezeManager?.OnUnload();
         _nadeManager?.OnUnload();
         _knifeCooldownManager?.OnUnload();
     }
