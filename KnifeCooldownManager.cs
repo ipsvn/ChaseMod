@@ -88,6 +88,7 @@ internal class KnifeCooldownManager
 
         if (pawn.Health - info.Damage > 0.0f)
         {
+            var originalColor = pawn.Render;
             pawn.Render = Color.FromArgb(160, 192, 0, 0);
             Utilities.SetStateChanged(pawn, "CBaseModelEntity", "m_clrRender");
 
@@ -98,7 +99,7 @@ internal class KnifeCooldownManager
                     return;
                 }
 
-                pawn.Render = Color.White;
+                pawn.Render = originalColor;
                 Utilities.SetStateChanged(pawn, "CBaseModelEntity", "m_clrRender");
             }, TimerFlags.STOP_ON_MAPCHANGE);
         }
