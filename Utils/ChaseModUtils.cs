@@ -22,9 +22,10 @@ public static class ChaseModUtils
         return gameRules;
     }
 
-    public static bool IsRealPlayer(CCSPlayerController p)
+    public static bool IsRealPlayer(CCSPlayerController? p)
     {
         return
+            p != null &&
             p.IsValid &&
             p.PlayerPawn.IsValid && p.PlayerPawn.Value != null &&
             p.PlayerPawn.Value.IsValid &&
