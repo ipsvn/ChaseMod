@@ -8,9 +8,9 @@ public class CCSMatch
 {
     private static nint MATCH_OFFSET = 0xF3C;
 
-    // string search '#SFUIHUD_InfoPanel_Coop_DeployMissionBust', xref and takefunc before if statement containing + 0xF3C in
+    // string search '#SFUIHUD_InfoPanel_Coop_DeployMissionBust', xref and take func before if statement containing + 0xF3C in
     // param_1 and value 1 in param_2, follow the last function called taking param_1 (just hope this offset doesn't change)
-    // TODO: I can remove probably this sig later
+    // TODO: I can probably remove this sig later
     private static MemoryFunctionVoid<IntPtr> CCSMatch_UpdateTeamScores =
         new(
             ChaseModUtils.IsLinux
