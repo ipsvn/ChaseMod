@@ -3,6 +3,13 @@ using System.Text.Json.Serialization;
 
 namespace ChaseMod;
 
+public sealed class FreezeRingParticle
+{
+    [JsonPropertyName("enabled")] public bool Enabled { get; set; } = false;
+    [JsonPropertyName("vpcfFile")] public string VpcfFile { get; set; } = "particles/example/freezering.vpcf";
+    [JsonPropertyName("lifetime")] public float Lifetime { get; set; } = 0.35f;
+}
+
 public sealed class ChaseModConfig : BasePluginConfig
 {
     [JsonPropertyName("ConfigVersion")]
@@ -21,4 +28,6 @@ public sealed class ChaseModConfig : BasePluginConfig
     [JsonPropertyName("enableFreezeTimeCountDownSound")] public bool EnableFreezeTimeCountDownSound { get; set; } = false;
     [JsonPropertyName("freezeTimeCountDownSoundPath")] public string FreezeTimeCountDownSoundPath { get; set; } = "sounds/player/playerping";
     [JsonPropertyName("disableBoostTriggers")] public bool DisableBoostTriggers { get; set; } = true;
+
+    [JsonPropertyName("freezeRingParticle")] public FreezeRingParticle FreezeRingParticle { get; set; } = new();
 }

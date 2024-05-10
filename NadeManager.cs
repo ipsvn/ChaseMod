@@ -4,6 +4,9 @@ using ChaseMod.Utils.Memory;
 using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
 using ChaseMod.Utils;
 using CounterStrikeSharp.API;
+using CounterStrikeSharp.API.Modules.Utils;
+using System.Drawing;
+using CounterStrikeSharp.API.Modules.Timers;
 
 namespace ChaseMod;
 
@@ -91,6 +94,11 @@ internal class NadeManager
             return;
         }
 
+        if (_plugin.Config.FreezeRingParticle.Enabled)
+        {
+            DoRingParticle(smokeProjectileOrigin);
+        }
+
         var players = ChaseModUtils.GetAllRealPlayers();
         foreach (var player in players)
         {
@@ -125,4 +133,31 @@ internal class NadeManager
 
         smoke.Remove();
     }
+
+    private void DoRingParticle(Vector position)
+    {
+        var particle = Utilities.CreateEntityByName<CParticleSystem>("info_particle_system");
+        if (particle == null)
+        {
+            ChaseMod.Logger.LogWarning("Particle system failed to spawn");
+            return;
+        }
+
+        particle.EffectName = _plugin.Config.FreezeRingParticle.VpcfFile;
+        particle.Teleport(position, QAngle.Zero, Vector.Zero);
+        particle.TintCP = 1;
+        particle.Tint = Color.FromArgb(255, 0, 64, 255);
+        particle.StartActive = true;
+        particle.DispatchSpawn();
+
+        _plugin.AddTimer(_plugin.Config.FreezeRingParticle.Lifetime, () => {
+
+            if (!particle.IsValid)
+            {
+                return;
+            }
+            particle.AcceptInput("DestroyImmediately");
+        }, TimerFlags.STOP_ON_MAPCHANGE);
+    }
+
 }
