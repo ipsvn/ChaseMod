@@ -2,6 +2,7 @@
 using CounterStrikeSharp.API;
 using System.Runtime.InteropServices;
 using CounterStrikeSharp.API.Modules.Utils;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ChaseMod.Utils;
 
@@ -22,7 +23,7 @@ public static class ChaseModUtils
         return gameRules;
     }
 
-    public static bool IsRealPlayer(CCSPlayerController? p)
+    public static bool IsRealPlayer([NotNullWhen(true)] CCSPlayerController? p)
     {
         return
             p != null &&
