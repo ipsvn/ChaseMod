@@ -23,6 +23,12 @@ internal class TeamSwitchManager
 
     public void OnLoad()
     {
+        // Just bail if team switching is disabled.
+        if (!_plugin.Config.EnableTeamSwitchingConditions)
+        {
+            return;
+        }
+
         // TODO: Combine this _lastWinningTeam check logic in separate function since we're duplicating the logic atm.
         _plugin.RegisterEventHandler<EventRoundEnd>((@event, info) =>
         {
