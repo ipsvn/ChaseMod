@@ -17,7 +17,7 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
 
     public override string ModuleName => "HnS ChaseMod";
     public override string ModuleAuthor => "svn";
-    public override string ModuleVersion => "2.1.0";
+    public override string ModuleVersion => "2.1.2";
 
     public ChaseModConfig Config { get; set; } = new();
     public void OnConfigParsed(ChaseModConfig config) { Config = config; }
