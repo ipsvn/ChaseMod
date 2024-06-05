@@ -8,13 +8,13 @@ public class CCSMatch
 {
     private static nint MATCH_OFFSET = 0xEE4;
 
-    // string search '#SFUIHUD_InfoPanel_Coop_DeployMissionBust', xref and take func before if statement containing + 0xEE4 in
-    // param_1 and value 1 in param_2, follow the last function called taking param_1 (just hope this offset doesn't change :clueless:)
+    // convar mp_default_team_winner_no_objective take func containing + 0xEE4 in param_1 and
+    // value 1 in param_2, follow the last function called taking param_1 (just hope this offset doesn't change :clueless:)
     // TODO: I can probably remove this sig later
     private static MemoryFunctionVoid<IntPtr> CCSMatch_UpdateTeamScores =
         new(
             ChaseModUtils.IsLinux
-                ? @"\x55\x48\x89\xE5\x41\x56\x41\x55\x49\x89\xFD\xBF\x02\x00\x00\x00"
+                ? @"55 48 89 E5 41 57 41 56 41 55 49 89 FD BF 02 00 00 00"
                 : @"\x48\x89\x5C\x24\x2A\x48\x89\x74\x24\x2A\x48\x89\x7C\x24\x2A\x41\x56\x48\x83\xEC\x20\x48\x8B\xF9\xB9\x02\x00\x00\x00"
         );
     
