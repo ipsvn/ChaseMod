@@ -13,7 +13,7 @@ namespace ChaseMod;
 internal class KnifeCooldownManager
 {
     private readonly ChaseMod _plugin;
-    private readonly Dictionary<CBasePlayerController, DateTime> _invulnerablePlayers = new();
+    private readonly Dictionary<CBasePlayerController, float> _invulnerablePlayers = new();
 
     public KnifeCooldownManager(ChaseMod chaseMod)
     {
@@ -74,9 +74,9 @@ internal class KnifeCooldownManager
             return HookResult.Continue;
         }
 
-        if (_invulnerablePlayers.TryGetValue(controller, out DateTime expiry))
+        if (_invulnerablePlayers.TryGetValue(controller, out float expiry))
         {
-            if (expiry > DateTime.Now)
+            if (expiry > Server.CurrentTime)
             {
                 return HookResult.Handled;
             }
@@ -84,7 +84,8 @@ internal class KnifeCooldownManager
 
         info.Damage = _plugin.Config.KnifeDamage;
         info.DamageFlags |= TakeDamageFlags_t.DFLAG_SUPPRESS_PHYSICS_FORCE;
-        _invulnerablePlayers[controller] = DateTime.Now.AddSeconds(_plugin.Config.KnifeCooldown);
+        
+        _invulnerablePlayers[controller] = Server.CurrentTime + _plugin.Config.KnifeCooldown;
 
         if (pawn.Health - info.Damage > 0.0f)
         {
