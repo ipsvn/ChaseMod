@@ -88,12 +88,16 @@ internal class KnifeCooldownManager
             }
         }
 
-        info.Damage = _plugin.Config.KnifeDamage;
+        if (_plugin.Config.KnifeDamageModify)
+        {
+            info.Damage = _plugin.Config.KnifeDamage;
+        }
+
         info.DamageFlags |= TakeDamageFlags_t.DFLAG_SUPPRESS_PHYSICS_FORCE;
-        
+
         _invulnerablePlayers[controller] = Server.CurrentTime + _plugin.Config.KnifeCooldown;
 
-        if (pawn.Health - info.Damage > 0.0f)
+        if (_plugin.Config.KnifeCooldown > 0.0f && pawn.Health - info.Damage > 0.0f)
         {
             var originalColor = pawn.Render;
             pawn.Render = Color.FromArgb(160, 192, 0, 0);
