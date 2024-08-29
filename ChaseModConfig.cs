@@ -15,6 +15,7 @@ public sealed class ChaseModConfig : BasePluginConfig
     [JsonPropertyName("ConfigVersion")]
     public override int Version { get; set; } = 4;
 
+    [JsonPropertyName("enableKnifeHook")] public bool EnableKnifeHook { get; set; } = true;
     [JsonPropertyName("knifeDamage")] public int KnifeDamage { get; set; } = 50;
     [JsonPropertyName("knifeCooldown")] public float KnifeCooldown { get; set; } = 2.0f;
     [JsonPropertyName("stunThrowTime")] public float StunThrowTime { get; set; } = 2.0f;

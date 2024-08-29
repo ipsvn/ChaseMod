@@ -22,12 +22,18 @@ internal class KnifeCooldownManager
 
     public void OnLoad()
     {
-        VirtualFunctions.CBaseEntity_TakeDamageOldFunc.Hook(CBaseEntity_TakeDamageOldFuncHook, HookMode.Pre);
+        if (_plugin.Config.EnableKnifeHook)
+        {
+            VirtualFunctions.CBaseEntity_TakeDamageOldFunc.Hook(CBaseEntity_TakeDamageOldFuncHook, HookMode.Pre);
+        }
     }
 
     public void OnUnload()
     {
-        VirtualFunctions.CBaseEntity_TakeDamageOldFunc.Unhook(CBaseEntity_TakeDamageOldFuncHook, HookMode.Pre);
+        if (_plugin.Config.EnableKnifeHook)
+        {
+            VirtualFunctions.CBaseEntity_TakeDamageOldFunc.Unhook(CBaseEntity_TakeDamageOldFuncHook, HookMode.Pre);
+        }
     }
 
     private HookResult CBaseEntity_TakeDamageOldFuncHook(DynamicHook hook)
