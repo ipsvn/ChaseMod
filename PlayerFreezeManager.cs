@@ -41,6 +41,12 @@ internal class PlayerFreezeManager
 
         ChaseMod.Logger.LogInformation($"Freeze player {pawn.Index}");
 
+        // Let's not freeze players that seem to already be frozen by another plugin
+        if (pawn.MoveType == MoveType_t.MOVETYPE_OBSOLETE)
+        {
+            return;
+        }
+
         var origVelocity = pawn.AbsVelocity.ToManaged();
         pawn.AbsVelocity.Set(0, 0, 0);
 
