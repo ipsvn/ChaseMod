@@ -69,13 +69,13 @@ internal class KnifeCooldownManager
         }
 
         // if attacked player is counter-terrorist or on the same team, ignore damage from knife
-        if (controller.TeamNum == (byte)CsTeam.CounterTerrorist || controller.TeamNum == attacker.TeamNum)
+        if (controller.Team == CsTeam.CounterTerrorist || controller.TeamNum == attacker.TeamNum)
         {
             return HookResult.Handled;
         }
 
         // if attacked player is not terrorist, handle normally?
-        if (controller.TeamNum != (byte)CsTeam.Terrorist)
+        if (controller.Team != CsTeam.Terrorist)
         {
             return HookResult.Continue;
         }
