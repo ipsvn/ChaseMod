@@ -118,7 +118,7 @@ public class ChaseMod : BasePlugin, IPluginConfig<ChaseModConfig>
                     }
                 }
 
-                if (weapon.DesignerName == "weapon_knife")
+                if (Config.EnableKnifeDisabling && weapon.DesignerName == "weapon_knife")
                 {
                     if (controller.Team == CsTeam.CounterTerrorist)
                     {

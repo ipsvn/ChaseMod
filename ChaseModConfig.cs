@@ -27,6 +27,7 @@ public sealed class ChaseModConfig : BasePluginConfig
     [JsonPropertyName("enableTeamSwitchingConditions")] public bool EnableTeamSwitchingConditions { get; set; } = true;
     [JsonPropertyName("maxTerroristWinStreak")] public int MaxTerroristWinStreak { get; set; } = 5;
 
+    [JsonPropertyName("enableKnifeDisabling")] public bool EnableKnifeDisabling { get; set; } = false;
     [JsonPropertyName("alwaysDisableTerroristKnife")] public bool AlwaysDisableTerroristKnife { get; set; } = false;
 
     [JsonPropertyName("ctStartFreezeTime")] public float RoundStartFreezeTime { get; set; } = 15.0f;
