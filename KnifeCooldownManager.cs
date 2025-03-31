@@ -41,35 +41,34 @@ internal class KnifeCooldownManager
         var entity = hook.GetParam<CEntityInstance>(0);
         var info = hook.GetParam<CTakeDamageInfo>(1);
 
-        if (!entity.IsValid || !info.Attacker.IsValid)
+        var attacker = info.Attacker.Value;
+        var inflictor = info.Inflictor.Value;
+
+        if (!entity.IsValid || attacker == null || inflictor == null)
         {
             return HookResult.Continue;
         }
 
-        if (entity.DesignerName != "player" || info.Attacker.Value?.DesignerName != "player")
+        if (entity.DesignerName != "player" 
+            || attacker.DesignerName != "player" 
+            || inflictor.DesignerName != "player")
         {
             return HookResult.Continue;
         }
 
-        var attacker = info.Attacker.Value.As<CCSPlayerPawn>();
+        var attackerPawn = attacker.As<CCSPlayerPawn>();
 
         var pawn = entity.As<CCSPlayerPawn>();
         var controller = pawn.OriginalController.Value!;
 
-        if (attacker.WeaponServices == null || !attacker.WeaponServices.ActiveWeapon.IsValid)
-        {
-            return HookResult.Continue;
-        }
-
-        var weapon = attacker.WeaponServices.ActiveWeapon.Value!;
-
-        if (weapon.DesignerName != "weapon_knife")
+        var weapon = attackerPawn.WeaponServices?.ActiveWeapon.Value;
+        if (weapon == null || weapon.DesignerName != "weapon_knife")
         {
             return HookResult.Continue;
         }
 
         // if attacked player is counter-terrorist or on the same team, ignore damage from knife
-        if (controller.Team == CsTeam.CounterTerrorist || controller.TeamNum == attacker.TeamNum)
+        if (controller.Team == CsTeam.CounterTerrorist || controller.TeamNum == attackerPawn.TeamNum)
         {
             return HookResult.Handled;
         }
