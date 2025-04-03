@@ -116,6 +116,7 @@ internal class RoundStartFreezeTimeManager
         {
             // convar SetValue isn't replicated on clients it seems...
             Server.ExecuteCommand($"sv_falldamage_scale {_normalFalldamageScale ?? 1}");
+            _normalFalldamageScale = null;
         }
         else
         {
