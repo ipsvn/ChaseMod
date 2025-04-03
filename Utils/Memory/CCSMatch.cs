@@ -8,7 +8,7 @@ namespace ChaseMod.Utils.Memory;
 
 public class CCSMatch
 {
-    private static nint MATCH_OFFSET = 0xEE4;
+    private static nint MATCH_OFFSET = 0xEF4;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct MCCSMatch
