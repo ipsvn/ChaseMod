@@ -12,7 +12,7 @@ public class CCSMatch
     // xref convar mp_default_team_winner_no_objective, used in 2 if statements
     // with value 2 and 3 (t and ct), the first function inside this has first
     // argument like `+0xef4` and `1` as second argument. 0xef4 is the offset
-    private static nint MATCH_OFFSET = 0xEF4;
+    private static nint MATCH_OFFSET = 0xEEC;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct MCCSMatch
