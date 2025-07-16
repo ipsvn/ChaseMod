@@ -60,14 +60,11 @@ public class CCSMatch
     {
         var teams = Utilities.FindAllEntitiesByDesignerName<CCSTeam>("cs_team_manager");
 
-        var terrorists = teams.First(team => (CsTeam)team.TeamNum == CsTeam.Terrorist);
-        var cts = teams.First(team => (CsTeam)team.TeamNum == CsTeam.CounterTerrorist);
-
-        foreach(var team in teams)
+        foreach (var team in teams)
         {
             var csTeam = (CsTeam) team.TeamNum;
 
-            if(csTeam == CsTeam.Terrorist)
+            if (csTeam == CsTeam.Terrorist)
             {
                 team.Score = match.m_terroristScoreTotal;
                 team.ScoreFirstHalf = match.m_terroristScoreFirstHalf;
