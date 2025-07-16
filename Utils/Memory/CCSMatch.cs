@@ -1,5 +1,6 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Memory;
 using CounterStrikeSharp.API.Modules.Utils;
 using System.Runtime.InteropServices;
 
@@ -7,12 +8,6 @@ namespace ChaseMod.Utils.Memory;
 
 public class CCSMatch
 {
-    // to find offset:
-    // xref convar mp_default_team_winner_no_objective, used in 2 if statements
-    // with value 2 and 3 (t and ct), the first function inside this has first
-    // argument like `+0xef4` and `1` as second argument. 0xef4 is the offset
-    private static nint MATCH_OFFSET = 0xEEC;
-
     [StructLayout(LayoutKind.Sequential)]
     public struct MCCSMatch
     {
@@ -33,7 +28,11 @@ public class CCSMatch
 
     public static void SwapTeamScores(CCSGameRules gameRules)
     {
-        var structOffset = gameRules.Handle + MATCH_OFFSET;
+        // closest schema variable to it, hasn't changed in past updates whereas
+        // the full offset has
+        var structOffset = gameRules.Handle
+            + Schema.GetSchemaOffset("CCSGameRules", "m_bMapHasBombZone")
+            + 0x02;
 
         var marshallMatch = Marshal.PtrToStructure<MCCSMatch>(structOffset);
 
