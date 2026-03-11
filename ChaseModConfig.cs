@@ -34,8 +34,5 @@ public sealed class ChaseModConfig : BasePluginConfig
     [JsonPropertyName("enableFreezeTimeCountDownSound")] public bool EnableFreezeTimeCountDownSound { get; set; } = false;
     [JsonPropertyName("freezeTimeCountDownSoundPath")] public string FreezeTimeCountDownSoundPath { get; set; } = "sounds/player/playerping";
 
-    [JsonPropertyName("absvelocityWorkaroundMultiplier")] public float absvelocityWorkaroundMultiplier { get; set; } = 1.0f;
-    [JsonPropertyName("disableBoostTriggers")] public bool DisableBoostTriggers { get; set; } = true;
-
     [JsonPropertyName("freezeRingParticle")] public FreezeRingParticle FreezeRingParticle { get; set; } = new();
 }
