@@ -41,6 +41,11 @@ internal class KnifeCooldownManager
         var entity = hook.GetParam<CEntityInstance>(0);
         var info = hook.GetParam<CTakeDamageInfo>(1);
 
+        if (info.DamageFlags.HasFlag(TakeDamageFlags_t.DFLAG_FORCE_DEATH))
+        {
+            return HookResult.Continue;
+        }
+
         var attacker = info.Attacker.Value;
         var inflictor = info.Inflictor.Value;
 
