@@ -23,9 +23,10 @@ jobs:
         run: dotnet build
       - name: Create output directory
         run: |
-          mkdir -p output/ChaseMod
-          mv ./bin/Debug/net10.0/ChaseMod.dll output/ChaseMod/
-          mv ./bin/Debug/net10.0/ChaseMod.pdb output/ChaseMod/
+          mkdir -p output/plugins/ChaseMod output/gamedata
+          mv ./ChaseMod.gamedata.json output/gamedata/
+          mv ./bin/Debug/net10.0/ChaseMod.dll output/plugins/ChaseMod/
+          mv ./bin/Debug/net10.0/ChaseMod.pdb output/plugins/ChaseMod/
       - name: Publish artifact
         uses: actions/upload-artifact@v4
         with:
