@@ -46,7 +46,7 @@ jobs:
           name: ChaseMod-${{ github.sha }}
       - name: Create release assets
         run: |
-          zip -r ChaseMod-${{ github.sha }}.zip ./ChaseMod
+          zip -r ChaseMod-${{ github.sha }}.zip ./*
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
