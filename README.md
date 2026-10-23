@@ -23,4 +23,4 @@ Override the amount of damage the knife does, along with the possibility of addi
 Switch teams on CT win, optionally on T winstreak (with `maxTerroristWinStreak` option). Enable/disable entirely with the `enableTeamSwitchingConditions` config option.
 
 ## Installation
-Download the .zip from the [releases](https://github.com/ipsvn/ChaseMod/releases) and extract the contents into `counterstrikesharp/plugins/` on your server.
+Download the .zip from the [releases](https://github.com/ipsvn/ChaseMod/releases) and extract the contents into `counterstrikesharp/` on your server.
